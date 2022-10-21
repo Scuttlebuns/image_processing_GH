@@ -27,20 +27,32 @@ void filter1(vector<vector<vector<int>>> &vec) {
 	size_t colors = vec.at(0).at(0).size();
 	if (!colors) exit(1);
 
-	make_rect(vec, 50, 200, 50, 60); 
-	make_rect(vec, 50, 200, 100, 110); 
+	//make_rect(vec, 50, 200, 50, 60); 
+	//make_rect(vec, 50, 200, 100, 110); 
 
 	//Do the image filtering on every row and column in this image...
 	for (int i = 0; i < rows; i++) {
 		for (int j = 0; j < cols; j++) {
-			vec.at(i).at(j).at(RED) *= 2;
-			vec.at(i).at(j).at(GREEN) *= 2;
-			vec.at(i).at(j).at(BLUE) *= 2;
+			vec.at(i).at(j).at(RED) *= 0.5;
+			vec.at(i).at(j).at(GREEN) *= 0.5;
+			vec.at(i).at(j).at(BLUE) *= 0.5;
 
 			//r is the red value at the current spot, g is the green, b is the blue
 			int r = vec.at(i).at(j).at(RED); //Bounds check with .at the first time
 			int g = vec[i][j][GREEN]; //Skip bounds check for speed
 			int b = vec[i][j][BLUE];
+
+			if (j < 460){
+				if(b > 110 and r > 100 and g > 115){
+				g *= 0.5;
+				r *= 2.0;
+				b *= 0.5;
+				}
+			}
+
+			vec.at(i).at(j).at(RED) = r * 2;
+			vec.at(i).at(j).at(GREEN) = g * 2;
+			vec.at(i).at(j).at(BLUE) = b * 2;
 
 			//DEMO CODE BEGIN
 			/*
@@ -51,14 +63,14 @@ void filter1(vector<vector<vector<int>>> &vec) {
             vec.at(i).at(j).at(BLUE) *= 0.8; //Reduce blue by 20%
 			*/
 
-			//Add a rainbow pattern 
+		/*	//Add a rainbow pattern 
 			if (r > 150 and g < 150) {
 				int avg = (r+g+b)/3;
 				vec[i][j][RED] = avg + 128*cos(i/20.0);
 				vec[i][j][GREEN] = avg + 128*sin(i/50.0);;
 				vec[i][j][BLUE] = avg + 128*cos(i/40.0 + 3);
 			}
-
+*/
 			/*
 			//Complex Example - Do sepia toning
 			//Get the red, green and blue values at row i, col j:
