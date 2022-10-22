@@ -64,21 +64,46 @@ void filter1(vector<vector<vector<int>>> &vec) {
 	//make_rect(vec, 50, 200, 50, 60); 
 	//make_rect(vec, 50, 200, 100, 110); 
 
-			double r = 0; //Bounds check with .at the first time
-			double g = 0; //Skip bounds check for speed
-			double b = 0;
+			double r_top = 0; //Bounds check with .at the first time
+			double g_top = 0; //Skip bounds check for speed
+			double b_top = 0;
 
-			double set_temp2 = 6;
+			double temp_top = exp(9.903487553);
 
-			color_temp(set_temp2, r, g, b);
+			color_temp(temp_top, r_top, g_top, b_top);
+			
+			cout << "top" << endl;
+			cout << "r: " << r_top << endl;
+			cout << "g: " << g_top << endl;
+			cout << "b: " << b_top << endl;
 
-			cout << "r: " << r << endl;
-			cout << "g: " << g << endl;
-			cout << "b: " << b << endl;
+			double r_bottom = 0; //Bounds check with .at the first time
+			double g_bottom = 0; //Skip bounds check for speed
+			double b_bottom = 0;
+
+			double temp_bottom = exp(7.60090246);
+
+			color_temp(temp_bottom, r_bottom, g_bottom, b_bottom);
+			
+			cout << "bottom:" << endl;
+			cout << "r: " << r_bottom << endl;
+			cout << "g: " << g_bottom << endl;
+			cout << "b: " << b_bottom << endl;
 
 	//Do the image filtering on every row and column in this image...
 	for (int i = 0; i < rows; i++) {
 		for (int j = 0; j < cols; j++) {
+			double r = 0.0, g = 0.0, b = 0.0;
+			if (j < (cols * 0.52)){
+				r = r_top;
+				g = g_top;
+				b = b_top;
+			}
+			else{
+				r = r_bottom;
+				g = g_bottom;
+				b = b_bottom;
+			}
 			//	vec.at(i).at(j).at(RED) *= 0.5;
 			//	vec.at(i).at(j).at(GREEN) *= 0.5;
 			//	vec.at(i).at(j).at(BLUE) *= 0.5;
