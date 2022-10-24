@@ -18,13 +18,15 @@ void filter2(vector<vector<vector<int>>> &vec) {
 	if (!colors) exit(1);
 
 	bool stop = false;
-	const int BOTTOMVAL = (2 * rows / 3);
+	const int BOTTOMVAL = (2 * cols / 3);
 	const int BOTTOMVAL2 = (2 * rows / 3);
 	for (int i = 0; i < rows; i++) {
-			if (i == (2 * rows /3)) {
+/*
+		if (i == (2 * rows /3)) {
 				stop = true;
 			} else if (i > (2 * rows / 3)) break;
-		for (int j = 0; j < cols; j++) {
+*/
+			for (int j = 0; j < cols; j++) {
 			//DEMO CODE BEGIN
 			//How far are we from the center?
 			/*
@@ -41,13 +43,13 @@ void filter2(vector<vector<vector<int>>> &vec) {
 			int r = vec.at(i).at(j).at(RED); //Bounds check with .at the first time
 			int g = vec[i][j][GREEN]; //Skip bounds check for speed
 			int b = vec[i][j][BLUE];
-
+/*
 			if (stop) {
 				vec.at(i).at(j).at(RED) = 0;
 				vec.at(i).at(j).at(GREEN) = 0;
 				vec.at(i).at(j).at(BLUE) = 0;
 			}
-
+*/
 			//Gray
 			if (i > rows/3 and i < (2*rows/3) and j > cols/3 and j < (2*cols/3)) {
 				int avg = (r+g+b)/3;
@@ -56,8 +58,8 @@ void filter2(vector<vector<vector<int>>> &vec) {
 				vec[i][j][BLUE] = avg;
 			}
 			if (i > rows/3 and i < (2*rows/3) and j > cols/3 and j < (2*cols/3)) {
-				cout << "Row (i): " << i << "\t Col (j): " << j << endl;
-				swap(vec.at(i).at(j), vec.at(i).at(BOTTOMVAL - j));
+//				cout << "Row (i): " << i << "\t Col (j): " << j << endl;
+//				swap(vec.at(i).at(j), vec.at(i).at(BOTTOMVAL - j));
 			}
 
 		}
