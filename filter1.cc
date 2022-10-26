@@ -1,4 +1,4 @@
-//Student 1 Name:
+//Student 1 Name:Voss,Sayre,Heins
 #include <vector>
 #include <iostream>
 #include <iomanip>
