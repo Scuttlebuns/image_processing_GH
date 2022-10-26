@@ -25,7 +25,7 @@ void filter1(vector<vector<vector<int>>> &vec);
 void filter2(vector<vector<vector<int>>> &vec);
 
 //Student3 will write this in the file filter3.cc, if they exist
-void filter3(vector<vector<vector<int>>> &vec,vector<vector<vector<int>>> &vec2);
+void filter3(vector<vector<vector<int>>> &vec,vector<vector<vector<int>>> &vec2, vector<vector<vector<int>>> &vec3);
 
 //This code must be run with a command line parameter, so print error and quit if they don't run it right
 void usage() {
@@ -73,6 +73,8 @@ int main(int argc, char **argv) {
 		CImg<unsigned char> image (argv[1]);
 		CImg<unsigned char> image2;
 		if (argc > 2) image2.load(argv[2]);
+		CImg<unsigned char> image3;
+		if (argc > 3) image3.load(argv[3]);
 
 		int cols = image.width(); 
 		int rows = image.height();
@@ -80,12 +82,16 @@ int main(int argc, char **argv) {
 		int cols2 = image2.width();
 		int rows2 = image2.height();
 
+		int cols3 = image3.width();
+		int rows3 = image3.height();
 		//Create a new 3D vector to pass to the students' image filter code
 		//Even though it is of ints, it is really uint8_t's, any value over 255 will cap at 255
 		vector<vector<vector<int>>> vec(cols,vector<vector<int>>(rows,vector<int>(COLORS)));
 		vector<vector<vector<int>>> vec2(cols2,vector<vector<int>>(rows2,vector<int>(COLORS)));
+		vector<vector<vector<int>>> vec3(cols3,vector<vector<int>>(rows3,vector<int>(COLORS)));
 		image_to_vec(image,vec,cols,rows); //Copy data from image to vec to make it easier on students
 		image_to_vec(image2,vec2,cols2,rows2); //Copy data from image2 to vec2 to make it easier on students
+		image_to_vec(image3,vec3,cols3,rows3); //Copy data from image3 to vec3 to make it easier on students
 		clock_t end_time = clock();
 		cerr << "Image load time: " << double (end_time - start_time) / CLOCKS_PER_SEC << " secs\n";
 
@@ -117,12 +123,13 @@ int main(int argc, char **argv) {
 
 		//PHASE 4 - Run Student 3's Code, if they exist. If they exist, uncomment out this code block
 		   start_time = clock();
-		   filter3(vec,vec2); 
+		   cout << "Starting filter 3.\n";
+		   filter3(vec,vec2,vec3); 
 		   end_time = clock();
 		   cerr << "Filter 3 time: " << double (end_time - start_time) / CLOCKS_PER_SEC << " secs\n";
 		   start_time = clock();
 		   vec_to_image(image,vec,cols,rows); //Copy from the vec to the image object
-		//image.save_png("filter3.png"); //Uncomment this for higher quality output
+	//	image.save_png("filter3.png"); //Uncomment this for higher quality output
 		image.save_jpeg("filter3.jpg", 80); //Output result after filter 3
 		end_time = clock();
 		cerr << "Time to write filter3.jpg: " << double (end_time - start_time) / CLOCKS_PER_SEC << " secs\n";

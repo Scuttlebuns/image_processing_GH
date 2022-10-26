@@ -94,7 +94,7 @@ void filter1(vector<vector<vector<int>>> &vec) {
 	for (int i = 0; i < rows; i++) {
 		for (int j = 0; j < cols; j++) {
 			double r = 0.0, g = 0.0, b = 0.0;
-			if (j < (cols * 0.52)){
+			if (j < (cols * 0.50)){
 				r = r_top;
 				g = g_top;
 				b = b_top;
